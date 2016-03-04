@@ -1,5 +1,5 @@
-#ifndef __FEBIRD_C_hashtab_H__
-#define __FEBIRD_C_hashtab_H__
+#ifndef __NARK_C_hashtab_H__
+#define __NARK_C_hashtab_H__
 
 /*TODO: */
 
@@ -14,5 +14,5 @@ struct compact_hashtab
 {
 };
 
-#endif /* __FEBIRD_C_hashtab_H__ */
+#endif /* __NARK_C_hashtab_H__ */
 

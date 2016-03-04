@@ -38,13 +38,13 @@ struct ballocator
 	uint32_t nUsed_cell;
 };
 
-FEBIRD_DLL_EXPORT int bbinit(struct ballocator* self, uint32_t cell_size);
-FEBIRD_DLL_EXPORT void bbdestroy(struct ballocator* self);
+NARK_DLL_EXPORT int bbinit(struct ballocator* self, uint32_t cell_size);
+NARK_DLL_EXPORT void bbdestroy(struct ballocator* self);
 
-FEBIRD_DLL_EXPORT uint32_t bballoc(struct ballocator* self);
-FEBIRD_DLL_EXPORT void bbfree(struct ballocator* self, uint32_t id);
+NARK_DLL_EXPORT uint32_t bballoc(struct ballocator* self);
+NARK_DLL_EXPORT void bbfree(struct ballocator* self, uint32_t id);
 
-FEBIRD_DLL_EXPORT void* bbaddress(struct ballocator* self, uint32_t id);
+NARK_DLL_EXPORT void* bbaddress(struct ballocator* self, uint32_t id);
 
 #define BB_ADDRESS(self, id) (self->pChunks[(id)/BB_CHUNK_SIZE].base + self->cell_size * ((id)%BB_CHUNK_SIZE))
 

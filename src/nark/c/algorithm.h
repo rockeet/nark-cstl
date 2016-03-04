@@ -54,7 +54,7 @@ typedef struct nark_arraycb
 	field_type_t field_type_idx;
 } nark_arraycb;
 
-void FEBIRD_DLL_EXPORT nark_arraycb_init(nark_arraycb* self, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type, int is_byptr);
+void NARK_DLL_EXPORT nark_arraycb_init(nark_arraycb* self, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type, int is_byptr);
 
 #define nark_offsetp(ptr, field_name) ((char*)&((ptr)->field_name) - (char*)(ptr))
 
@@ -74,36 +74,36 @@ void FEBIRD_DLL_EXPORT nark_arraycb_init(nark_arraycb* self, ptrdiff_t elem_size
 
 //! @{
 //! va_arg ... is Key
-ptrdiff_t FEBIRD_DLL_EXPORT nark_acb_binary_search(const nark_arraycb* acb, const void* first, ptrdiff_t count, ...);
-ptrdiff_t FEBIRD_DLL_EXPORT nark_acb_lower_bound(const nark_arraycb* acb, const void* first, ptrdiff_t count, ...);
-ptrdiff_t FEBIRD_DLL_EXPORT nark_acb_upper_bound(const nark_arraycb* acb, const void* first, ptrdiff_t count, ...);
-ptrdiff_t FEBIRD_DLL_EXPORT nark_acb_equal_range(const nark_arraycb* acb, const void* first, ptrdiff_t count, ptrdiff_t* upp, ...);
+ptrdiff_t NARK_DLL_EXPORT nark_acb_binary_search(const nark_arraycb* acb, const void* first, ptrdiff_t count, ...);
+ptrdiff_t NARK_DLL_EXPORT nark_acb_lower_bound(const nark_arraycb* acb, const void* first, ptrdiff_t count, ...);
+ptrdiff_t NARK_DLL_EXPORT nark_acb_upper_bound(const nark_arraycb* acb, const void* first, ptrdiff_t count, ...);
+ptrdiff_t NARK_DLL_EXPORT nark_acb_equal_range(const nark_arraycb* acb, const void* first, ptrdiff_t count, ptrdiff_t* upp, ...);
 //@}
 
 //////////////////////////////////////////////////////////////////////////
 
 
-void FEBIRD_DLL_EXPORT nark_sort(void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type);
+void NARK_DLL_EXPORT nark_sort(void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type);
 
-void FEBIRD_DLL_EXPORT nark_pop_heap(void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type);
-void FEBIRD_DLL_EXPORT nark_push_heap(void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type);
-void FEBIRD_DLL_EXPORT nark_make_heap(void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type);
-void FEBIRD_DLL_EXPORT nark_sort_heap(void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type);
+void NARK_DLL_EXPORT nark_pop_heap(void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type);
+void NARK_DLL_EXPORT nark_push_heap(void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type);
+void NARK_DLL_EXPORT nark_make_heap(void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type);
+void NARK_DLL_EXPORT nark_sort_heap(void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type);
 
-ptrdiff_t FEBIRD_DLL_EXPORT nark_lower_bound(const void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type, ...);
-ptrdiff_t FEBIRD_DLL_EXPORT nark_upper_bound(const void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type, ...);
-ptrdiff_t FEBIRD_DLL_EXPORT nark_equal_range(const void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type, ptrdiff_t* upper, ...);
+ptrdiff_t NARK_DLL_EXPORT nark_lower_bound(const void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type, ...);
+ptrdiff_t NARK_DLL_EXPORT nark_upper_bound(const void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type, ...);
+ptrdiff_t NARK_DLL_EXPORT nark_equal_range(const void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type, ptrdiff_t* upper, ...);
 
-void FEBIRD_DLL_EXPORT nark_sort_p(void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type);
+void NARK_DLL_EXPORT nark_sort_p(void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type);
 
-void FEBIRD_DLL_EXPORT nark_pop_heap_p(void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type);
-void FEBIRD_DLL_EXPORT nark_push_heap_p(void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type);
-void FEBIRD_DLL_EXPORT nark_make_heap_p(void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type);
-void FEBIRD_DLL_EXPORT nark_sort_heap_p(void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type);
+void NARK_DLL_EXPORT nark_pop_heap_p(void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type);
+void NARK_DLL_EXPORT nark_push_heap_p(void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type);
+void NARK_DLL_EXPORT nark_make_heap_p(void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type);
+void NARK_DLL_EXPORT nark_sort_heap_p(void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type);
 
-ptrdiff_t FEBIRD_DLL_EXPORT nark_lower_bound_p(const void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type, ...);
-ptrdiff_t FEBIRD_DLL_EXPORT nark_upper_bound_p(const void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type, ...);
-ptrdiff_t FEBIRD_DLL_EXPORT nark_equal_range_p(const void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type, ptrdiff_t* upper, ...);
+ptrdiff_t NARK_DLL_EXPORT nark_lower_bound_p(const void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type, ...);
+ptrdiff_t NARK_DLL_EXPORT nark_upper_bound_p(const void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type, ...);
+ptrdiff_t NARK_DLL_EXPORT nark_equal_range_p(const void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type, ptrdiff_t* upper, ...);
 
 
 //---------------------------------------------------------------------------------------

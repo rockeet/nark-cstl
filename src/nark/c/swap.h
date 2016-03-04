@@ -23,16 +23,16 @@ typedef long long BK8;
 	defined(__ia64) ||\
 	defined(_M_IA64)
 
-#ifndef FEBIRD_C_STRUCT_ALIGN
-#define FEBIRD_C_STRUCT_ALIGN 8
+#ifndef NARK_C_STRUCT_ALIGN
+#define NARK_C_STRUCT_ALIGN 8
 #endif
 
 #include "swap64.h"
 
 #else
 
-#ifndef FEBIRD_C_STRUCT_ALIGN
-#define FEBIRD_C_STRUCT_ALIGN 4
+#ifndef NARK_C_STRUCT_ALIGN
+#define NARK_C_STRUCT_ALIGN 4
 #endif
 
 #include "swap32.h"

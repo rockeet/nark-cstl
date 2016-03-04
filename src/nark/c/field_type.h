@@ -40,7 +40,7 @@ enum field_type_t {
 	tev_uint64,
 	tev_float,
 	tev_double,
-#if defined(FEBIRD_C_LONG_DOUBLE_SIZE)
+#if defined(NARK_C_LONG_DOUBLE_SIZE)
 	tev_ldouble,
 #endif
 	tev_int,
@@ -59,15 +59,15 @@ enum field_type_t {
 };
 typedef enum field_type_t field_type_t;
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 field_type_size(field_type_t t);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 const char*
 field_type_name_str(field_type_t t);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 field_type_t
 internal_field_type(field_type_t field_type);
 
@@ -92,7 +92,7 @@ inline field_type_t nark_get_field_type(const nark_int64_t*) { return tev_int64;
 inline field_type_t nark_get_field_type(const float*)          { return tev_float; }
 inline field_type_t nark_get_field_type(const double*)         { return tev_double; }
 
-#if defined(FEBIRD_C_LONG_DOUBLE_SIZE)
+#if defined(NARK_C_LONG_DOUBLE_SIZE)
 inline field_type_t nark_get_field_type(const long double*)    { return tev_ldouble; }
 #endif
 

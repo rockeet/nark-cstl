@@ -54,9 +54,9 @@ ptrdiff_t _TM_equal_range(const char* _First, ptrdiff_t _Count, ptrdiff_t elem_s
 		else
 		{	// range straddles mid, find each end and return
 
-		//  GCC ÔÚ´¦Àí va_list copy Ê±ÓĞÎÊÌâ,
-		//      Ê¹ÓÃ va_copy ²»ĞĞ£¬ÔÚ²ÎÊı±íÖĞÖØ¸´Á½¸ö va_list ²ÎÊıÒ²²»ĞĞ¡£
-		//      ËùÒÔ£¬½« _TM_lower_bound/_TM_upper_bound ÊÖ¹¤Õ¹¿ª
+		//  GCC åœ¨å¤„ç† va_list copy æ—¶æœ‰é—®é¢˜,
+		//      ä½¿ç”¨ va_copy ä¸è¡Œï¼Œåœ¨å‚æ•°è¡¨ä¸­é‡å¤ä¸¤ä¸ª va_list å‚æ•°ä¹Ÿä¸è¡Œã€‚
+		//      æ‰€ä»¥ï¼Œå°† _TM_lower_bound/_TM_upper_bound æ‰‹å·¥å±•å¼€
 		//  GCC has bugs when deal with va_list copy,
 		//      bugs both present on va_copy and copy by duplicate on param-list.
 		//      so expand _TM_lower_bound/_TM_upper_bound manually.

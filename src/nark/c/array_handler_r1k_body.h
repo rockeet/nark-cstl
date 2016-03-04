@@ -1,23 +1,23 @@
 // input MACRO params:
-//   FEBIRD_FUNC_NAME
+//   NARK_FUNC_NAME
 
-static const array_handler_r1k CAT_TOKEN2(_S_tab_, FEBIRD_FUNC_NAME)[] =
+static const array_handler_r1k CAT_TOKEN2(_S_tab_, NARK_FUNC_NAME)[] =
 {
-#define MAKE_FUNC_NAME(tev) CAT_TOKEN3(FEBIRD_FUNC_NAME,_,tev)
+#define MAKE_FUNC_NAME(tev) CAT_TOKEN3(NARK_FUNC_NAME,_,tev)
 #include "fun_field_type_tab.h"
 #undef MAKE_FUNC_NAME
 	NULL
 };
 
-ptrdiff_t CAT_TOKEN2(nark_, FEBIRD_FUNC_NAME) // fun name
+ptrdiff_t CAT_TOKEN2(nark_, NARK_FUNC_NAME) // fun name
 	(const void* first, ptrdiff_t count, ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type, ...)
 {
 	field_type_t ft2 = internal_field_type(field_type);
-	array_handler_r1k pf = CAT_TOKEN2(_S_tab_, FEBIRD_FUNC_NAME)[ft2];
+	array_handler_r1k pf = CAT_TOKEN2(_S_tab_, NARK_FUNC_NAME)[ft2];
 	ptrdiff_t ret;
 	va_list key;
 	va_start(key, field_type);
-#ifdef FEBIRD_ALGORITHM_DEBUG
+#ifdef NARK_ALGORITHM_DEBUG
 	g_first = (char*)first;
 	g_last = (char*)first + elem_size * count;
 #endif
@@ -31,23 +31,23 @@ ptrdiff_t CAT_TOKEN2(nark_, FEBIRD_FUNC_NAME) // fun name
 	return ret;
 }
 
-static const array_handler_r1k CAT_TOKEN2(Ptr_S_tab_, FEBIRD_FUNC_NAME)[] =
+static const array_handler_r1k CAT_TOKEN2(Ptr_S_tab_, NARK_FUNC_NAME)[] =
 {
-#define MAKE_FUNC_NAME(tev) CAT_TOKEN4(FEBIRD_FUNC_NAME,_,tev, _byptr)
+#define MAKE_FUNC_NAME(tev) CAT_TOKEN4(NARK_FUNC_NAME,_,tev, _byptr)
 #include "fun_field_type_tab.h"
 #undef MAKE_FUNC_NAME
 	NULL
 };
 
-ptrdiff_t CAT_TOKEN3(nark_, FEBIRD_FUNC_NAME, _p) // fun name
+ptrdiff_t CAT_TOKEN3(nark_, NARK_FUNC_NAME, _p) // fun name
 	(const void* first, ptrdiff_t count, ptrdiff_t field_offset, field_type_t field_type, ...)
 {
 	field_type_t ft2 = internal_field_type(field_type);
-	array_handler_r1k pf = CAT_TOKEN2(Ptr_S_tab_, FEBIRD_FUNC_NAME)[ft2];
+	array_handler_r1k pf = CAT_TOKEN2(Ptr_S_tab_, NARK_FUNC_NAME)[ft2];
 	ptrdiff_t ret;
 	va_list key;
 	va_start(key, field_type);
-#ifdef FEBIRD_ALGORITHM_DEBUG
+#ifdef NARK_ALGORITHM_DEBUG
 	g_first = (char*)first;
 	g_last = (char*)first + sizeof(char*) * count;
 #endif
@@ -56,6 +56,6 @@ ptrdiff_t CAT_TOKEN3(nark_, FEBIRD_FUNC_NAME, _p) // fun name
 	return ret;
 }
 
-#undef FEBIRD_FUNC_NAME
+#undef NARK_FUNC_NAME
 
 

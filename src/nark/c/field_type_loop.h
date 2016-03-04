@@ -2,7 +2,7 @@
 //	 FIELD_TYPE_FILE
 
 #ifndef VALUE_SIZE
-# error must define VALUE_SIZE, if you need not VALUE_SIZE, define it as FEBIRD_C_MAX_VALUE_SIZE
+# error must define VALUE_SIZE, if you need not VALUE_SIZE, define it as NARK_C_MAX_VALUE_SIZE
 #endif
 
 #  define FIELD_TYPE_TYPE signed char
@@ -55,7 +55,7 @@
 #  include FIELD_TYPE_FILE
 #endif
 
-#if defined(FEBIRD_C_LONG_DOUBLE_SIZE) && VALUE_SIZE >= FEBIRD_C_LONG_DOUBLE_SIZE
+#if defined(NARK_C_LONG_DOUBLE_SIZE) && VALUE_SIZE >= NARK_C_LONG_DOUBLE_SIZE
 #  define FIELD_TYPE_TYPE long double
 #  define FIELD_TYPE_NAME tev_ldouble
 #  include FIELD_TYPE_FILE

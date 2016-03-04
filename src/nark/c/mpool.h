@@ -72,13 +72,13 @@ struct mpool
 
 /// 是否允许 mpool 分配超出 max_cell_size 的内存块
 /// allow alloc memory block bigger than max_cell_size
-#define FEBIRD_MPOOL_ALLOW_BIG_BLOCK	1
+#define NARK_MPOOL_ALLOW_BIG_BLOCK	1
 
 /// when destroy, auto free big block or not
-#define FEBIRD_MPOOL_AUTO_FREE_BIG		2
+#define NARK_MPOOL_AUTO_FREE_BIG		2
 
 /// use malloc or this->salloc to alloc big block
-#define FEBIRD_MPOOL_MALLOC_BIG			4
+#define NARK_MPOOL_MALLOC_BIG			4
 
 	size_t big_flags;
 	size_t big_blocks; // size > max_cell_size, use malloc, this is rare case
@@ -86,18 +86,18 @@ struct mpool
 };
 
 /***********************************************************************/
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 void*
 default_srealloc(struct sallocator* sa, void* ptr, size_t old_size, size_t new_size);
 /***********************************************************************/
 
 
 /***********************************************************************/
-FEBIRD_DLL_EXPORT void fixed_mpool_init   (struct fixed_mpool* mpf);
-FEBIRD_DLL_EXPORT void fixed_mpool_destroy(struct fixed_mpool* mpf);
+NARK_DLL_EXPORT void fixed_mpool_init   (struct fixed_mpool* mpf);
+NARK_DLL_EXPORT void fixed_mpool_destroy(struct fixed_mpool* mpf);
 
-FEBIRD_DLL_EXPORT void* fixed_mpool_alloc(struct fixed_mpool* mpf);
-FEBIRD_DLL_EXPORT void  fixed_mpool_free (struct fixed_mpool* mpf, void* ptr);
+NARK_DLL_EXPORT void* fixed_mpool_alloc(struct fixed_mpool* mpf);
+NARK_DLL_EXPORT void  fixed_mpool_free (struct fixed_mpool* mpf, void* ptr);
 /***********************************************************************/
 
 
@@ -106,8 +106,8 @@ FEBIRD_DLL_EXPORT void  fixed_mpool_free (struct fixed_mpool* mpf, void* ptr);
  * sfixed_mpool_{salloc|sfree} should only called by sallocator interface
  * sfixed_mpool_srealloc is an assert only hook.
  */
-FEBIRD_DLL_EXPORT void sfixed_mpool_init   (struct sfixed_mpool* mp);
-FEBIRD_DLL_EXPORT void sfixed_mpool_destroy(struct sfixed_mpool* mp);
+NARK_DLL_EXPORT void sfixed_mpool_init   (struct sfixed_mpool* mp);
+NARK_DLL_EXPORT void sfixed_mpool_destroy(struct sfixed_mpool* mp);
 /***********************************************************************/
 
 
@@ -115,22 +115,22 @@ FEBIRD_DLL_EXPORT void sfixed_mpool_destroy(struct sfixed_mpool* mp);
 /**
  * mpool_{salloc|sfree} may called by function name, or by interface
  */
-FEBIRD_DLL_EXPORT void mpool_init   (struct mpool* mp);
-FEBIRD_DLL_EXPORT void mpool_destroy(struct mpool* mp);
+NARK_DLL_EXPORT void mpool_init   (struct mpool* mp);
+NARK_DLL_EXPORT void mpool_destroy(struct mpool* mp);
 
-FEBIRD_DLL_EXPORT void* mpool_salloc(struct mpool* mp, size_t size);
-FEBIRD_DLL_EXPORT void  mpool_sfree (struct mpool* mp, void* ptr, size_t size);
+NARK_DLL_EXPORT void* mpool_salloc(struct mpool* mp, size_t size);
+NARK_DLL_EXPORT void  mpool_sfree (struct mpool* mp, void* ptr, size_t size);
 
-FEBIRD_DLL_EXPORT size_t mpool_used_cells(const struct mpool* mp);
-FEBIRD_DLL_EXPORT size_t mpool_used_bytes(const struct mpool* mp);
+NARK_DLL_EXPORT size_t mpool_used_cells(const struct mpool* mp);
+NARK_DLL_EXPORT size_t mpool_used_bytes(const struct mpool* mp);
 /***********************************************************************/
 
 
 /***********************************************************************/
-FEBIRD_DLL_EXPORT struct mpool* mpool_get_global(void);
+NARK_DLL_EXPORT struct mpool* mpool_get_global(void);
 
-FEBIRD_DLL_EXPORT void* gsalloc(size_t size);
-FEBIRD_DLL_EXPORT void gsfree(void* ptr, size_t size);
+NARK_DLL_EXPORT void* gsalloc(size_t size);
+NARK_DLL_EXPORT void gsfree(void* ptr, size_t size);
 /***********************************************************************/
 
 #ifdef __cplusplus

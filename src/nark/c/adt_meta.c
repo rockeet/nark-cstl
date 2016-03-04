@@ -7,7 +7,7 @@
 #pragma optimize("t", on)
 #endif
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 nark_adt_compare_less_tag(const struct container_vtab* vtab,
 							const struct container_type* cont,

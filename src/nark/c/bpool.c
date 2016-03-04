@@ -26,7 +26,7 @@
 
 #define INVALID_ID 0xFFFFFFFF
 
-FEBIRD_DLL_EXPORT int bbinit(struct ballocator* self, uint32_t cell_size)
+NARK_DLL_EXPORT int bbinit(struct ballocator* self, uint32_t cell_size)
 {
 	assert(cell_size >= 8);
 	assert(cell_size <= 512);
@@ -46,7 +46,7 @@ FEBIRD_DLL_EXPORT int bbinit(struct ballocator* self, uint32_t cell_size)
 	return NULL != self->pChunks;
 }
 
-FEBIRD_DLL_EXPORT void bbdestroy(struct ballocator* self)
+NARK_DLL_EXPORT void bbdestroy(struct ballocator* self)
 {
 	int i;
 	for (i = 0; i < self->nMaxChunks; ++i) {
@@ -58,7 +58,7 @@ FEBIRD_DLL_EXPORT void bbdestroy(struct ballocator* self)
 
 //#define GetNext(i)  self->head
 
-FEBIRD_DLL_EXPORT uint32_t bballoc(struct ballocator* self)
+NARK_DLL_EXPORT uint32_t bballoc(struct ballocator* self)
 {
 	struct bchunk_entry* entry = self->recent;
 
@@ -106,7 +106,7 @@ FEBIRD_DLL_EXPORT uint32_t bballoc(struct ballocator* self)
 	}
 }
 
-FEBIRD_DLL_EXPORT void bbfree(struct ballocator* self, uint32_t id)
+NARK_DLL_EXPORT void bbfree(struct ballocator* self, uint32_t id)
 {
 	int iChunk = id / BB_CHUNK_SIZE;
 	struct bchunk_entry* entry = self->pChunks + iChunk;
@@ -139,7 +139,7 @@ FEBIRD_DLL_EXPORT void bbfree(struct ballocator* self, uint32_t id)
 	self->nUsed_cell--;
 }
 
-FEBIRD_DLL_EXPORT void* bbaddress(struct ballocator* self, uint32_t id)
+NARK_DLL_EXPORT void* bbaddress(struct ballocator* self, uint32_t id)
 {
 	int iChunk = id / BB_CHUNK_SIZE;
 	int iCell  = id % BB_CHUNK_SIZE;

@@ -11,7 +11,7 @@
 #  define trb_pool_allocator_base std::allocator
 #endif
 
-#ifdef _DEBUG
+#if defined(_DEBUG) || !defined(NDEBUG)
 #  include <boost/detail/atomic_count.hpp>
 
 	struct trb_pool_allocator : public trb_pool_allocator_base<unsigned char>

@@ -14,7 +14,7 @@
 #endif
 
 //#if defined(_DEBUG) || !defined(NDEBUG)
-#ifdef FEBIRD_ALGORITHM_DEBUG
+#ifdef NARK_ALGORITHM_DEBUG
 char *g_first, *g_last;
 #  define CHECK_BOUND(p) assert(p >= g_first && p < g_last)
 #  define CHECKED_ASSIGN(x,y) CHECK_BOUND(x), ASSIGN_FROM(x,y)
@@ -37,10 +37,10 @@ char *g_first, *g_last;
 
 static void check_args(ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t field_type)
 {
-	if (elem_size > FEBIRD_C_MAX_VALUE_SIZE)
+	if (elem_size > NARK_C_MAX_VALUE_SIZE)
 	{
 		fprintf(stderr, "invalid argument, elem_size=%d too large, max support is %d.\n"
-			, (int)elem_size, FEBIRD_C_MAX_VALUE_SIZE
+			, (int)elem_size, NARK_C_MAX_VALUE_SIZE
 			);
 		abort();
 	}
@@ -51,7 +51,7 @@ static void check_args(ptrdiff_t elem_size, ptrdiff_t field_offset, field_type_t
 			);
 		abort();
 	}
-	else if (elem_size % FEBIRD_C_STRUCT_ALIGN != 0)
+	else if (elem_size % NARK_C_STRUCT_ALIGN != 0)
 	{
 		fprintf(stderr, "invalid argument elem_size=%d, aborted\n", (int)elem_size);
 		abort();
@@ -71,8 +71,8 @@ void_handler get_heandler(const void_handler* ptab, ptrdiff_t elem_size, field_t
 {
 	void_handler pf = NULL;
 	field_type = internal_field_type(field_type);
-	assert(elem_size <= FEBIRD_C_MAX_VALUE_SIZE);
-	if (elem_size < FEBIRD_C_STRUCT_ALIGN)
+	assert(elem_size <= NARK_C_MAX_VALUE_SIZE);
+	if (elem_size < NARK_C_STRUCT_ALIGN)
 	{
 		switch (elem_size)
 		{
@@ -83,17 +83,17 @@ void_handler get_heandler(const void_handler* ptab, ptrdiff_t elem_size, field_t
 		case 2:
 			pf = ptab[field_type + (elem_size-1)*tev_type_count__];
 			break;
-#if FEBIRD_C_STRUCT_ALIGN > 4
+#if NARK_C_STRUCT_ALIGN > 4
 		case 4:
 			pf = ptab[field_type + (3-1)*tev_type_count__];
 			break;
 #endif
-#if FEBIRD_C_STRUCT_ALIGN > 8
+#if NARK_C_STRUCT_ALIGN > 8
 		case 8:
 			pf = ptab[field_type + (4-1)*tev_type_count__];
 			break;
 #endif
-#if FEBIRD_C_STRUCT_ALIGN > 16
+#if NARK_C_STRUCT_ALIGN > 16
 		case 8:
 			pf = ptab[field_type + (5-1)*tev_type_count__];
 			break;
@@ -102,16 +102,16 @@ void_handler get_heandler(const void_handler* ptab, ptrdiff_t elem_size, field_t
 	}
 	else
 	{
-#if FEBIRD_C_STRUCT_ALIGN == 4
+#if NARK_C_STRUCT_ALIGN == 4
 #define SKIP_TAB_ROWS 2
-#elif FEBIRD_C_STRUCT_ALIGN == 8
+#elif NARK_C_STRUCT_ALIGN == 8
 #define SKIP_TAB_ROWS 3
-#elif FEBIRD_C_STRUCT_ALIGN == 16
+#elif NARK_C_STRUCT_ALIGN == 16
 #define SKIP_TAB_ROWS 4
 #else
-#error not supported "FEBIRD_C_STRUCT_ALIGN" value
+#error not supported "NARK_C_STRUCT_ALIGN" value
 #endif
-		ptrdiff_t fun_idx = (elem_size / FEBIRD_C_STRUCT_ALIGN + SKIP_TAB_ROWS - 1) * tev_type_count__ + field_type;
+		ptrdiff_t fun_idx = (elem_size / NARK_C_STRUCT_ALIGN + SKIP_TAB_ROWS - 1) * tev_type_count__ + field_type;
 		pf = ptab[fun_idx];
 	}
 	if (0 == pf)
@@ -290,19 +290,19 @@ typedef char* _ptr_t;
 
 #define ELEM_SIZE_FILE_NAME "fun_field_type_tab.h"
 
-#define FEBIRD_FUNC_NAME sort
+#define NARK_FUNC_NAME sort
 #include "array_handler_body.h"
 
-#define FEBIRD_FUNC_NAME push_heap
+#define NARK_FUNC_NAME push_heap
 #include "array_handler_body.h"
 
-#define FEBIRD_FUNC_NAME pop_heap
+#define NARK_FUNC_NAME pop_heap
 #include "array_handler_body.h"
 
-#define FEBIRD_FUNC_NAME make_heap
+#define NARK_FUNC_NAME make_heap
 #include "array_handler_body.h"
 
-#define FEBIRD_FUNC_NAME sort_heap
+#define NARK_FUNC_NAME sort_heap
 #include "array_handler_body.h"
 
 static const array_update_heap _S_tab_update_heap[] =
@@ -318,7 +318,7 @@ void nark_update_heap(void* first, ptrdiff_t _IdxUpdated, ptrdiff_t count, ptrdi
 	array_update_heap pf;
 	check_args(elem_size, field_offset, field_type);
 	pf = (array_update_heap)get_heandler(_S_tab_update_heap, elem_size, field_type);
-#ifdef FEBIRD_ALGORITHM_DEBUG
+#ifdef NARK_ALGORITHM_DEBUG
 	g_first = (char*)first;
 	g_last = (char*)first + elem_size * count;
 #endif
@@ -337,7 +337,7 @@ void nark_update_heap_p(void* first, ptrdiff_t _IdxUpdated, ptrdiff_t count, ptr
 {
 	field_type_t ft2 = internal_field_type(field_type);
 	array_update_heap pf = Ptr_S_tab_update_heap[ft2];
-#ifdef FEBIRD_ALGORITHM_DEBUG
+#ifdef NARK_ALGORITHM_DEBUG
 	g_first = (char*)first;
 	g_last = (char*)first + sizeof(void*) * count;
 #endif
@@ -346,15 +346,15 @@ void nark_update_heap_p(void* first, ptrdiff_t _IdxUpdated, ptrdiff_t count, ptr
 
 //----------------------------------------------------------------------------------------
 // ignore VALUE_SIZE
-#define VALUE_SIZE FEBIRD_C_MAX_VALUE_SIZE
+#define VALUE_SIZE NARK_C_MAX_VALUE_SIZE
 
-#define FEBIRD_FUNC_NAME lower_bound
+#define NARK_FUNC_NAME lower_bound
 #include "array_handler_r1k_body.h"
 
-#define FEBIRD_FUNC_NAME upper_bound
+#define NARK_FUNC_NAME upper_bound
 #include "array_handler_r1k_body.h"
 
-#define FEBIRD_FUNC_NAME binary_search
+#define NARK_FUNC_NAME binary_search
 #include "array_handler_r1k_body.h"
 
 static array_handler_r2k _S_tab_equal_range[] =

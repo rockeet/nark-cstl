@@ -294,7 +294,7 @@ void mpool_init(struct mpool* mp)
 		mp->fixed[i].sa = mp->sa;
 		fixed_mpool_init(&mp->fixed[i]);
 	}
-//	if (mp->big_flags & FEBIRD_MPOOL_ALLOW_BIG_BLOCK) {
+//	if (mp->big_flags & NARK_MPOOL_ALLOW_BIG_BLOCK) {
 //	always init
 		mp->big_blocks = 0;
 		mp->big_list.prev = mp->big_list.next = &mp->big_list;
@@ -310,9 +310,9 @@ void mpool_destroy(struct mpool* mp)
 		fprintf(stderr, "fatal: nark.mpool_destroy: not inited or has already destroyed\n");
 		return;
 	}
-	if (mp->big_flags & FEBIRD_MPOOL_ALLOW_BIG_BLOCK)
+	if (mp->big_flags & NARK_MPOOL_ALLOW_BIG_BLOCK)
 	{
-		if (mp->big_flags & FEBIRD_MPOOL_AUTO_FREE_BIG)
+		if (mp->big_flags & NARK_MPOOL_AUTO_FREE_BIG)
 		{
 			size_t total_size = 0;
 			struct big_block_header *p;
@@ -320,7 +320,7 @@ void mpool_destroy(struct mpool* mp)
 			{
 				struct big_block_header *q = p->next;
 				total_size += p->size;
-				if (mp->big_flags & FEBIRD_MPOOL_MALLOC_BIG)
+				if (mp->big_flags & NARK_MPOOL_MALLOC_BIG)
 					free(p);
 				else
 					mp->sa->sfree(mp->sa, p, p->size);
@@ -352,20 +352,20 @@ void mpool_destroy(struct mpool* mp)
 static
 void* mpool_salloc_big(struct mpool* mp, size_t size)
 {
-	if (mp->big_flags & FEBIRD_MPOOL_ALLOW_BIG_BLOCK)
+	if (mp->big_flags & NARK_MPOOL_ALLOW_BIG_BLOCK)
    	{
 		// this is rare case
 		struct big_block_header *p, *h;
 
-		if (mp->big_flags & FEBIRD_MPOOL_AUTO_FREE_BIG)
+		if (mp->big_flags & NARK_MPOOL_AUTO_FREE_BIG)
 			size += sizeof(struct big_block_header);
 		p = (struct big_block_header*)
-			( mp->big_flags & FEBIRD_MPOOL_MALLOC_BIG
+			( mp->big_flags & NARK_MPOOL_MALLOC_BIG
 			? malloc(size)
 			: mp->sa->salloc(mp->sa, size)
 			);
 		if (p) {
-			if (mp->big_flags & FEBIRD_MPOOL_AUTO_FREE_BIG) {
+			if (mp->big_flags & NARK_MPOOL_AUTO_FREE_BIG) {
 				h = &mp->big_list;
 				p->size = size;
 				p->prev = h;
@@ -391,9 +391,9 @@ void* mpool_salloc_big(struct mpool* mp, size_t size)
 static
 void mpool_sfree_big(struct mpool* mp, void* ptr, size_t size)
 {
-	if (mp->big_flags & FEBIRD_MPOOL_ALLOW_BIG_BLOCK)
+	if (mp->big_flags & NARK_MPOOL_ALLOW_BIG_BLOCK)
    	{
-		if (mp->big_flags & FEBIRD_MPOOL_AUTO_FREE_BIG)
+		if (mp->big_flags & NARK_MPOOL_AUTO_FREE_BIG)
 	   	{
 			// this is rare case
 			struct big_block_header* bbh = (struct big_block_header*)ptr - 1;
@@ -409,7 +409,7 @@ void mpool_sfree_big(struct mpool* mp, void* ptr, size_t size)
 		}
 		mp->big_blocks--;
 
-		if (mp->big_flags & FEBIRD_MPOOL_MALLOC_BIG)
+		if (mp->big_flags & NARK_MPOOL_MALLOC_BIG)
 			free(ptr);
 		else
 			mp->sa->sfree(mp->sa, ptr, size);
@@ -481,9 +481,9 @@ struct mpool* mpool_get_global(void)
 		global_mpool.max_cell_size = 256;
 		global_mpool.sa = &fal;
 		global_mpool.big_flags = 0
-			|FEBIRD_MPOOL_ALLOW_BIG_BLOCK
-			|FEBIRD_MPOOL_AUTO_FREE_BIG
-			|FEBIRD_MPOOL_MALLOC_BIG
+			|NARK_MPOOL_ALLOW_BIG_BLOCK
+			|NARK_MPOOL_AUTO_FREE_BIG
+			|NARK_MPOOL_MALLOC_BIG
 			;
 		mpool_init(&global_mpool);
 		atexit(&destroy_global_mpool);

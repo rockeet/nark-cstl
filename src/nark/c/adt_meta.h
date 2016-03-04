@@ -1,5 +1,5 @@
-#ifndef __FEBIRD_C_ADT_META_H__
-#define __FEBIRD_C_ADT_META_H__
+#ifndef __NARK_C_ADT_META_H__
+#define __NARK_C_ADT_META_H__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 # pragma once
@@ -108,7 +108,7 @@ struct container_vtab
 	void* app_data;
 };
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 nark_adt_compare_less_tag(const struct container_vtab* vtab,
 							const struct container_type* cont,
@@ -119,5 +119,5 @@ nark_adt_compare_less_tag(const struct container_vtab* vtab,
 }
 #endif
 
-#endif /* __FEBIRD_C_ADT_META_H__ */
+#endif /* __NARK_C_ADT_META_H__ */
 

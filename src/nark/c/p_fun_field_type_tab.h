@@ -17,6 +17,6 @@
 
 	MAKE_FUNC_NAME(tev_double),
 
-#ifdef FEBIRD_C_LONG_DOUBLE_SIZE
+#ifdef NARK_C_LONG_DOUBLE_SIZE
 	MAKE_FUNC_NAME(tev_ldouble),
 #endif

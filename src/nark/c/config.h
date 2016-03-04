@@ -13,9 +13,9 @@
 #define C_ISORT_MAX 16
 
 
-#define FEBIRD_C_MAX_VALUE_SIZE 64
+#define NARK_C_MAX_VALUE_SIZE 64
 
-// #define FEBIRD_C_LONG_DOUBLE_SIZE 10
+// #define NARK_C_LONG_DOUBLE_SIZE 10
 
 #endif // __nark_c_config_h__
 

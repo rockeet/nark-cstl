@@ -15,8 +15,8 @@
     use trb_probe_node to insert user allocated node, this node must be allocated by pf_alloc
  */
 
-#ifndef __FEBIRD_C_TRB_H__
-#define __FEBIRD_C_TRB_H__
+#ifndef __NARK_C_TRB_H__
+#define __NARK_C_TRB_H__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 # pragma once
@@ -153,7 +153,7 @@ struct trb_vtab
 	struct trb_node* (*pf_get_sum)(const struct trb_vtab*, const struct trb_tree*, const void* key, void* result);
 };
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 nark_trb_compare_less_tag(const struct trb_vtab*, const struct trb_tree*, const void* x, const void* y);
 
@@ -163,52 +163,52 @@ nark_trb_compare_less_tag(const struct trb_vtab*, const struct trb_tree*, const 
   before calling this function, set vtab members appropriately;
   if data_offset == 0, this function will set
  */
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 void
 trb_vtab_init(struct trb_vtab* vtab, field_type_t key_type);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 void
 trb_init(struct trb_tree* tree);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 struct trb_node*
 trb_probe(const struct trb_vtab*, struct trb_tree*, const void* data, int* existed);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 struct trb_node*
 trb_probe_node(const struct trb_vtab*, struct trb_tree*, struct trb_node* node);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int trb_erase(const struct trb_vtab*, struct trb_tree*, const void* key);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 trb_copy(const struct trb_vtab*, struct trb_tree* dest, const struct trb_tree* org);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 void
 trb_destroy(const struct trb_vtab* vtab, struct trb_tree* tree);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 struct trb_node*
 trb_find_tev_app(const struct trb_vtab* vtab, const struct trb_tree* tree, const void* key);
 
-FEBIRD_DLL_EXPORT void trb_assert_insert(const struct trb_vtab*, struct trb_tree* , void* data);
-FEBIRD_DLL_EXPORT void trb_assert_erase (const struct trb_vtab*, struct trb_tree* , void* data);
+NARK_DLL_EXPORT void trb_assert_insert(const struct trb_vtab*, struct trb_tree* , void* data);
+NARK_DLL_EXPORT void trb_assert_erase (const struct trb_vtab*, struct trb_tree* , void* data);
 
-FEBIRD_DLL_EXPORT struct trb_node* trb_iter_first(ptrdiff_t node_offset, const struct trb_tree*);
+NARK_DLL_EXPORT struct trb_node* trb_iter_first(ptrdiff_t node_offset, const struct trb_tree*);
 /// to last node
-FEBIRD_DLL_EXPORT struct trb_node* trb_iter_last(ptrdiff_t node_offset, const struct trb_tree*);
+NARK_DLL_EXPORT struct trb_node* trb_iter_last(ptrdiff_t node_offset, const struct trb_tree*);
 
-FEBIRD_DLL_EXPORT struct trb_node* trb_iter_next(ptrdiff_t node_offset, struct trb_node* iter);
-FEBIRD_DLL_EXPORT struct trb_node* trb_iter_prev(ptrdiff_t node_offset, struct trb_node* iter);
+NARK_DLL_EXPORT struct trb_node* trb_iter_next(ptrdiff_t node_offset, struct trb_node* iter);
+NARK_DLL_EXPORT struct trb_node* trb_iter_prev(ptrdiff_t node_offset, struct trb_node* iter);
 
-FEBIRD_DLL_EXPORT void trb_check_sum(const struct trb_vtab*, struct trb_tree*, struct trb_node*);
+NARK_DLL_EXPORT void trb_check_sum(const struct trb_vtab*, struct trb_tree*, struct trb_node*);
 
 #ifdef __cplusplus
 } // end of extern "C"
 #endif
 
-#endif /* __FEBIRD_C_TRB_H__ */
+#endif /* __NARK_C_TRB_H__ */
 

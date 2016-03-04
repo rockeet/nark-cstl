@@ -52,7 +52,7 @@
 #  define FIELD_TYPE_NAME tev_double
 #  include FIELD_TYPE_FILE
 
-#if defined(FEBIRD_C_LONG_DOUBLE_SIZE)
+#if defined(NARK_C_LONG_DOUBLE_SIZE)
 #  define FIELD_TYPE_TYPE long double
 #  define FIELD_TYPE_NAME tev_ldouble
 #  include FIELD_TYPE_FILE

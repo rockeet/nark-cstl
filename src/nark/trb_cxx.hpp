@@ -27,14 +27,14 @@
 extern "C" {
 
 //------------------------------------------------------------------------
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 trb_compare_tev_std_string( const struct trb_vtab*  vtab,
 							const struct trb_tree*  tree,
 							const void*  x,
 							const void*  y);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 trb_compare_tev_std_string_nocase(
 		const struct trb_vtab*  vtab,
@@ -43,14 +43,14 @@ trb_compare_tev_std_string_nocase(
         const void*  y);
 
 //------------------------------------------------------------------------
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 trb_compare_tev_std_wstring(const struct trb_vtab*  vtab,
 							const struct trb_tree*  tree,
 							const void*  x,
 							const void*  y);
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 trb_compare_tev_std_wstring_nocase(
 		const struct trb_vtab*  vtab,
@@ -60,14 +60,14 @@ trb_compare_tev_std_wstring_nocase(
 
 //------------------------------------------------------------------------
 // for trbstrmap_imp
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 trb_compare_tev_inline_cstr(
 					 const struct trb_vtab*  vtab,
 					 const struct trb_tree*  tree,
 					 const void*  x,
 					 const void*  y);
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 int
 trb_compare_tev_inline_cstr_nocase(
 					 const struct trb_vtab*  vtab,
@@ -79,10 +79,10 @@ trb_compare_tev_inline_cstr_nocase(
 
 namespace nark {
 
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 void trbxx_vtab_init(struct trb_vtab* vtab, field_type_t ikey_type, trb_func_compare key_comp);
 
-//FEBIRD_DLL_EXPORT void trbxx_raise_duplicate_error(const char* func);
+//NARK_DLL_EXPORT void trbxx_raise_duplicate_error(const char* func);
 
 template<class T, int DataOffset>
 class trb_iterator_base	: public std::iterator<std::bidirectional_iterator_tag, T>
@@ -176,7 +176,7 @@ public:
 		this->pf_data_copy = &trb_vtab_cxx_base::copy_value;
 	}
 };
-FEBIRD_DLL_EXPORT
+NARK_DLL_EXPORT
 trb_node* trbxx_checked_alloc(const trb_vtab& vtab, size_t size, const char* msg);
 
 // compare to std::map::iterator/reverse_iterator
@@ -363,7 +363,7 @@ public:
 		return trb_probe_node(&s_vtab, &m_tree, node);
 	}
 
-	template<class DataIO> void load(DataIO& dio) {
+	template<class DataIO> void dio_load(DataIO& dio) {
 		var_size_t size; dio >> size;
 		for (size_t c = size.t; c; --c) {
 			trb_node *n0, *n1;
@@ -377,15 +377,15 @@ public:
 		}
 	}
 
-	template<class DataIO> void save(DataIO& dio) const {
+	template<class DataIO> void dio_save(DataIO& dio) const {
 		dio << var_size_t(this->size());
 		for (iterator iter = begin(); iter; ++iter)	dio << *iter;
 	}
 //#ifdef DATA_IO_REG_LOAD_SAVE
 //	DATA_IO_REG_LOAD_SAVE(trbtab)
 //#endif
-  template<class D> friend void DataIO_loadObject(D& d,       trbtab& x) { x.load(d); }
-  template<class D> friend void DataIO_saveObject(D& d, const trbtab& x) { x.save(d); }
+  template<class D> friend void DataIO_loadObject(D& d,       trbtab& x) { x.dio_load(d); }
+  template<class D> friend void DataIO_saveObject(D& d, const trbtab& x) { x.dio_save(d); }
 };
 
 template<class KeyPart, class Whole, int KeyOffset, trb_func_compare KeyCompare, class Alloc, int NodeOffset, int DataOffset>
@@ -411,8 +411,8 @@ public:
 //#ifdef DATA_IO_REG_LOAD_SAVE
 //	DATA_IO_REG_LOAD_SAVE(trbset)
 //#endif
-  template<class D> friend void DataIO_loadObject(D& d,       trbset& x) { x.load(d); }
-  template<class D> friend void DataIO_saveObject(D& d, const trbset& x) { x.save(d); }
+  template<class D> friend void DataIO_loadObject(D& d,       trbset& x) { x.dio_load(d); }
+  template<class D> friend void DataIO_saveObject(D& d, const trbset& x) { x.dio_save(d); }
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -451,8 +451,8 @@ public:
 //#ifdef DATA_IO_REG_LOAD_SAVE
 //	DATA_IO_REG_LOAD_SAVE(trbmap)
 //#endif
-  template<class D> friend void DataIO_loadObject(D& d,       trbmap& x) { x.load(d); }
-  template<class D> friend void DataIO_saveObject(D& d, const trbmap& x) { x.save(d); }
+  template<class D> friend void DataIO_loadObject(D& d,       trbmap& x) { x.dio_load(d); }
+  template<class D> friend void DataIO_saveObject(D& d, const trbmap& x) { x.dio_save(d); }
 };
 
 /**
@@ -830,7 +830,7 @@ public:
 	//! not compatible with std::map<string, Data>
 	//! std::map<string, Data> has no '\0' follow string
 	//! but `this` has '\0', except string in `this` has no '\0'
-	template<class DataIO> void load(DataIO& dio) {
+	template<class DataIO> void dio_load(DataIO& dio) {
 		var_size_t size; dio >> size;
 		for (size_t c = size.t; c; --c) {
 			var_size_t klen; dio >> klen;
@@ -850,7 +850,7 @@ public:
 		}
 	}
 
-	template<class DataIO> void save(DataIO& dio) const {
+	template<class DataIO> void dio_save(DataIO& dio) const {
 		dio << var_size_t(this->size());
 		for (iterator iter = begin(); iter; ++iter) {
 			dio << var_size_t(klen(iter));
@@ -864,8 +864,8 @@ public:
 //#ifdef DATA_IO_REG_LOAD_SAVE
 //	DATA_IO_REG_LOAD_SAVE(trbstrmap_imp)
 //#endif
-  template<class D> friend void DataIO_loadObject(D& d,       trbstrmap_imp& x) { x.load(d); }
-  template<class D> friend void DataIO_saveObject(D& d, const trbstrmap_imp& x) { x.save(d); }
+  template<class D> friend void DataIO_loadObject(D& d,       trbstrmap_imp& x) { x.dio_load(d); }
+  template<class D> friend void DataIO_saveObject(D& d, const trbstrmap_imp& x) { x.dio_save(d); }
 };
 
 template<class Data, class KeyLenType, trb_func_compare KeyCompare, class Alloc, int NodeOffset, int DataOffset>
@@ -884,8 +884,8 @@ class trbstrmap : public trbstrmap_imp<Data, unsigned char, KeyCompare, Alloc, N
 //#ifdef DATA_IO_REG_LOAD_SAVE
 //	DATA_IO_REG_LOAD_SAVE(trbstrmap)
 //#endif
-  template<class D> friend void DataIO_loadObject(D& d,       trbstrmap& x) { x.load(d); }
-  template<class D> friend void DataIO_saveObject(D& d, const trbstrmap& x) { x.save(d); }
+  template<class D> friend void DataIO_loadObject(D& d,       trbstrmap& x) { x.dio_load(d); }
+  template<class D> friend void DataIO_saveObject(D& d, const trbstrmap& x) { x.dio_save(d); }
 };
 
 template< class Data
@@ -899,8 +899,8 @@ class trbstrmap2 : public trbstrmap_imp<Data, unsigned short, KeyCompare, Alloc,
 //#ifdef DATA_IO_REG_LOAD_SAVE
 //	DATA_IO_REG_LOAD_SAVE(trbstrmap2)
 //#endif
-  template<class D> friend void DataIO_loadObject(D& d,       trbstrmap2& x) { x.load(d); }
-  template<class D> friend void DataIO_saveObject(D& d, const trbstrmap2& x) { x.save(d); }
+  template<class D> friend void DataIO_loadObject(D& d,       trbstrmap2& x) { x.dio_load(d); }
+  template<class D> friend void DataIO_saveObject(D& d, const trbstrmap2& x) { x.dio_save(d); }
 };
 
 template< class Data
@@ -914,8 +914,8 @@ class trbstrmap4 : public trbstrmap_imp<Data, int, KeyCompare, Alloc, NodeOffset
 //#ifdef DATA_IO_REG_LOAD_SAVE
 //	DATA_IO_REG_LOAD_SAVE(trbstrmap4)
 //#endif
-  template<class D> friend void DataIO_loadObject(D& d,       trbstrmap4& x) { x.load(d); }
-  template<class D> friend void DataIO_saveObject(D& d, const trbstrmap4& x) { x.save(d); }
+  template<class D> friend void DataIO_loadObject(D& d,       trbstrmap4& x) { x.dio_load(d); }
+  template<class D> friend void DataIO_saveObject(D& d, const trbstrmap4& x) { x.dio_save(d); }
 };
 
 } // name space nark

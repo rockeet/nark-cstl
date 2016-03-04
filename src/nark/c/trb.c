@@ -70,7 +70,7 @@ struct trb_path_arg
 {
 	int height;                          /* Stack height. */
 	int hlow;							 /* Equal Key Node */
-#if 0 // defined(_DEBUG)
+#if 0 // defined(_DEBUG) || !defined(NDEBUG)
 	struct trb_node* pa[TRB_MAX_HEIGHT]; /* Nodes on stack. */
 	unsigned char da[TRB_MAX_HEIGHT];    /* Directions moved from stack nodes. */
 #	define TPA_dir(i) arg->da[i]
@@ -488,7 +488,7 @@ void trb_vtab_init(struct trb_vtab* vtab, field_type_t key_type)
 			TRB_FUNC_ASSIGN(double);
 			vtab->key_size = sizeof(double); // 8
 			break;
-#ifdef FEBIRD_C_LONG_DOUBLE_SIZE
+#ifdef NARK_C_LONG_DOUBLE_SIZE
 		case tev_ldouble:
 			TRB_FUNC_ASSIGN(ldouble);
 			vtab->key_size = sizeof(long double);
@@ -579,7 +579,7 @@ trb_check_sum(const struct trb_vtab* vtab, struct trb_tree* tree, struct trb_nod
 	free(result);
 }
 
-#if defined(_DEBUG)
+#if defined(_DEBUG) || !defined(NDEBUG)
 #  define DBG_trb_check_sum(node) trb_check_sum(vtab, (struct trb_tree*)tree, node)
 #else
 #  define DBG_trb_check_sum(node)
@@ -716,7 +716,7 @@ trb_rotate_for_insert(const struct trb_vtab* vtab,
 				if (vtab->pf_sum_add) {
 					scopy(y, p2); // all of p2's descendents has been y's
 					reCompute(p2);
-				#ifdef _DEBUG
+				#if defined(_DEBUG) || !defined(NDEBUG)
 					if (p3 != (struct trb_node*)TRB_root_as_node(tree))
 						DBG_trb_check_sum(p3);
 					else
@@ -803,7 +803,7 @@ trb_rotate_for_insert(const struct trb_vtab* vtab,
 				if (vtab->pf_sum_add) {
 					scopy(y, p2); // all of p2's descendents has been y's
 					reCompute(p2);
-				#ifdef _DEBUG
+				#if defined(_DEBUG) || !defined(NDEBUG)
 					if (p3 != (struct trb_node*)TRB_root_as_node(tree))
 						DBG_trb_check_sum(p3);
 					else

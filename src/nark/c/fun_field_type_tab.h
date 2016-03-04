@@ -2,7 +2,7 @@
 //   MAKE_FUNC_NAME
 
 #ifndef VALUE_SIZE
-//# error must define VALUE_SIZE, if you need not VALUE_SIZE, define it as FEBIRD_C_MAX_VALUE_SIZE
+//# error must define VALUE_SIZE, if you need not VALUE_SIZE, define it as NARK_C_MAX_VALUE_SIZE
 #endif
 
 	MAKE_FUNC_NAME(tev_char),
@@ -41,8 +41,8 @@
 	NULL,
 #endif
 
-#ifdef FEBIRD_C_LONG_DOUBLE_SIZE
-#  if !defined(VALUE_SIZE) || defined(VALUE_SIZE) && VALUE_SIZE >= FEBIRD_C_LONG_DOUBLE_SIZE
+#ifdef NARK_C_LONG_DOUBLE_SIZE
+#  if !defined(VALUE_SIZE) || defined(VALUE_SIZE) && VALUE_SIZE >= NARK_C_LONG_DOUBLE_SIZE
 	MAKE_FUNC_NAME(tev_ldouble),
 #else
 	NULL,

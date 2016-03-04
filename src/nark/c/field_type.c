@@ -18,8 +18,8 @@ int field_type_size(field_type_t t)
    STATIC_ASSERT( 4 == sizeof(float))
    STATIC_ASSERT( 8 == sizeof(double))
 
-#ifdef FEBIRD_C_LONG_DOUBLE_SIZE
-	STATIC_ASSERT(FEBIRD_C_LONG_DOUBLE_SIZE == sizeof(long double))
+#ifdef NARK_C_LONG_DOUBLE_SIZE
+	STATIC_ASSERT(NARK_C_LONG_DOUBLE_SIZE == sizeof(long double))
 #endif
 	switch (t)
 	{
@@ -36,8 +36,8 @@ int field_type_size(field_type_t t)
 
 	case tev_float:   return 4;
 	case tev_double:  return 8;
-#if defined(FEBIRD_C_LONG_DOUBLE_SIZE)
-	case tev_ldouble: return FEBIRD_C_LONG_DOUBLE_SIZE;
+#if defined(NARK_C_LONG_DOUBLE_SIZE)
+	case tev_ldouble: return NARK_C_LONG_DOUBLE_SIZE;
 #endif
 	case tev_int:     return sizeof(int);
 	case tev_uint:    return sizeof(unsigned int);
@@ -67,7 +67,7 @@ const char* field_type_name_str(field_type_t t)
 	case tev_int64:   return "int64";
 	case tev_float:   return "float";
 	case tev_double:  return "double";
-#if defined(FEBIRD_C_LONG_DOUBLE_SIZE)
+#if defined(NARK_C_LONG_DOUBLE_SIZE)
 	case tev_ldouble: return "long double";
 #endif
 	case tev_ptr: return "pointer";
